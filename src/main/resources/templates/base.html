@@ -35,7 +35,39 @@
                     <li class="nav-item"><a class="nav-link" href="/user/addNotes"><i
                             class="fa-solid fa-plus"></i> Add </a></li>
                     <li class="nav-item"><a class="nav-link" href="/user/viewNotes"><i
-                            class="fa-solid fa-list"></i> View</a></li>
+                            class="fa-solid fa-list"></i> View All Notes </a></li>
+
+
+                    <!--edited just -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-list"></i>
+                            View by Category
+                        </a>
+                        <!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                        <!--                            <li><a class="dropdown-item" href="#">Personal Expenses</a></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Birthdates</a></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Sharemarket Info</a></li>-->
+                        <!--                            <li><a class="dropdown-item" href="#">Schedules</a></li>-->
+                        <!--                        </ul>-->
+
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/user/viewNotesByCategory?category=personal_expenses">Personal
+                                Expenses</a></li>
+                            <li><a class="dropdown-item"
+                                   href="/user/viewNotesByCategory?category=Birthdates">Birthdates</a></li>
+                            <li><a class="dropdown-item" href="/user/viewNotesByCategory?category=sharemarket_info">Sharemarket
+                                Info</a></li>
+                            <li><a class="dropdown-item"
+                                   href="/user/viewNotesByCategory?category=Schedules">Schedules</a></li>
+
+
+                            <!-- Add more categories as needed -->
+                        </ul>
+
+                    </li>
+
                 </th:block>
             </ul>
 
@@ -53,6 +85,15 @@
 
 
                 <th:block th:if="${user!=NULL}">
+
+                    <!-- Search bar for logged in user -->
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search note here"
+                               aria-label="Search">
+                        <button class="btn btn-outline-light btn-sm me-4" type="submit">Search</button>
+                        <!-- Added me-2 class for margin -->
+                    </form>
+
                     <li class="nav-item"><a href="#"
                                             class="btn btn-sm btn-primary"><i
                             class="fa-solid fa-user-plus"></i> [[${user.name}]]</a></li>

@@ -30,7 +30,19 @@ public class NotesServiceImpl implements NotesService{
     public List<Notes> getNotesByUser(User user) {
 
         return notesRepository.findByUser(user);
+
     }
+
+    @Override
+    public List<Notes> getNotesByCategoryAndUser(String category, User user) {
+        return notesRepository.findByCategoryAndUser(category, user);
+    }
+
+    @Override
+    public List<String> getAllCategories() {
+        return notesRepository.findAllCategories();
+    }
+
 
     @Override
     public Notes updateNotes(Notes notes) {

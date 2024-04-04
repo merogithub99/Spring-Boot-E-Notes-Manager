@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org"
-      th:replace="~{ base :: layout(~{::title} , ~{::section} ) }">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{ base :: layout(~{::title} , ~{::section} ) }">
+
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>Add Notes Page</title>
 </head>
+
 <body>
 <section>
     <div class="container mt-2">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-10 offset-md-1 bg-light text-dark"> <!-- Light background with dark text -->
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header   text-center"> <!-- Dark background for card header -->
                         <h3>Add your Notes</h3>
                         <th:block th:if="${session.msg}">
                             <p class="fs-5 text-center text-success">[[${session.msg}]]</p>
                             <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
                         </th:block>
-
                     </div>
                     <div class="card-body">
-                        <!--							<form action="saveNotes" th:action="@{/user/addNotes}" method="post">-->
                         <form action="/user/saveNotes" th:action="@{/user/saveNotes}" method="post">
-
                             <div class="mb-3">
-                                <label>Enter Title</label> <input type="text" name="title"
-                                                                  class="form-control">
+                                <label>Enter Title</label>
+                                <input type="text" name="title" class="form-control" required>
                             </div>
-
                             <div class="mb-3">
+                                <label>Select Category</label>
+                                <select name="category" class="form-control">
+                                    <option value="">select note category</option>
+                                    <option value="personal_expenses">Personal Expenses</option>
+                                    <option value="birthdates">Birthdates</option>
+                                    <option value="sharemarket_info">Sharemarket Info</option>
+                                    <option value="schedules">Schedules</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 bg-light"> <!-- Light background for description textarea -->
                                 <label>Enter Description</label>
-                                <textarea rows="6" cols="" class="form-control"
-                                          name="description"></textarea>
+                                <textarea rows="6" cols="" class="form-control" name="description" required></textarea>
                             </div>
-
                             <button class="btn btn-primary mt-4">Save</button>
-
-
                         </form>
                     </div>
                 </div>
@@ -45,4 +48,5 @@
     </div>
 </section>
 </body>
+
 </html>

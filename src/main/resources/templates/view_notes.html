@@ -23,7 +23,8 @@
 
                         <p class="fw-bold">[[${n.title}]]</p>
                         <p>[[${n.description}]]</p>
-                        <p>Publish Date : <span class="fw-bold text-primary">[[${n.date}]]</span> </p>
+                        <p>Publish Date : <span class="fw-bold text-primary">[[${n.date}]]</span></p>
+                        <p>Category: [[${n.category}]]</p>
 
                         <div class="text-center">
                             <a th:href="@{'editNotes/'+${n.id}}" class="btn btn-primary btn-sm">Edit</a>
@@ -41,3 +42,6 @@
 </section>
 </body>
 </html>
+
+
+

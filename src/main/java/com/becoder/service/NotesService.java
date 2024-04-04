@@ -15,5 +15,8 @@ public interface NotesService {
 
     public  boolean deleteNotes(int id);
 
-    }
+    List<Notes> getNotesByCategoryAndUser(String category, User user);
+
+    List<String> getAllCategories();
+}
 

@@ -34,23 +34,36 @@ public class UserController {
 
     @GetMapping("/addNotes")
     public String addNotes() {
+
         return "add_notes";
     }
 
     @GetMapping("/viewNotes")
-    public String viewNotes(Model m,Principal p ) {
-        User user= getUser(p, m);
+    public String viewNotes(Model m, Principal p) {
+        User user = getUser(p, m);
         notesService.getNotesByUser(user);
-        List<Notes> notes=notesService.getNotesByUser(user);
-        m.addAttribute("notesList",notes);
+        List<Notes> notes = notesService.getNotesByUser(user);
+        m.addAttribute("notesList", notes);
 
         return "view_notes";
     }
 
+
+    @GetMapping("/viewNotesByCategory")
+    public String viewNotesByCategory(@RequestParam String category, Model model, Principal principal) {
+        User user = getUser(principal, model);
+        List<Notes> notes = notesService.getNotesByCategoryAndUser(category, user);
+        List<String> categories = notesService.getAllCategories(); // Assuming you have a method to get all categories
+        model.addAttribute("notesList", notes);
+        model.addAttribute("categories", categories);
+        return "view_notes";
+    }
+
+
     @GetMapping("/editNotes/{id}")
-    public String editNotes(@PathVariable int id,Model m) {
-        Notes notes=notesService.getNotesById(id);
-        m.addAttribute("n",notes);
+    public String editNotes(@PathVariable int id, Model m) {
+        Notes notes = notesService.getNotesById(id);
+        m.addAttribute("n", notes);
         return "edit_notes";
     }
 
@@ -85,8 +98,8 @@ public class UserController {
 
 
     @GetMapping("/deleteNotes/{id}")
-    public String deleteNotes(@PathVariable int id,HttpSession session) {
-        boolean f=notesService.deleteNotes(id);
+    public String deleteNotes(@PathVariable int id, HttpSession session) {
+        boolean f = notesService.deleteNotes(id);
         if (f) {
             session.setAttribute("msg", "Notes deleted successfully");
         } else {

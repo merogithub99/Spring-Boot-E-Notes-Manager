@@ -10,7 +10,11 @@ public class Notes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
+
+    private String category;
+
     private String description;
+
     private LocalDate date;
     @ManyToOne
     private User user;
@@ -29,6 +33,14 @@ public class Notes {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDescription() {
