@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{ base :: layout(~{::title} , ~{::section} ) }">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{ base :: layout(~{::title} , ~{::section} ) }"
+      xmlns:script="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
     <title>Add Notes Page</title>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -27,18 +32,29 @@
                             </div>
                             <div class="mb-3">
                                 <label>Select Category</label>
-                                <select name="category" class="form-control">
+                                <select name="category" class="form-control" id="categorySelect">
                                     <option value="">select note category</option>
                                     <option value="personal_expenses">Personal Expenses</option>
                                     <option value="birthdates">Birthdates</option>
                                     <option value="sharemarket_info">Sharemarket Info</option>
                                     <option value="schedules">Schedules</option>
+                                    <option value="addNew">
+                                        <i class="fas fa-plus"></i>
+                                        Add New Category</option> <!-- Add option to add a new category -->
                                 </select>
+                                <input type="text" id="newCategoryInput" class="form-control mt-2" placeholder="Enter New Category" style="display: none;">
                             </div>
+
                             <div class="mb-3 bg-light"> <!-- Light background for description textarea -->
                                 <label>Enter Description</label>
                                 <textarea rows="6" cols="" class="form-control" name="description" required></textarea>
                             </div>
+
+                            <div class="mb-5">
+                                <label>Upload PDF File</label>
+                                <input type="file" name="file" class="form-control-file">
+                            </div>
+
                             <button class="btn btn-primary mt-4">Save</button>
                         </form>
                     </div>
@@ -47,6 +63,29 @@
         </div>
     </div>
 </section>
+
+
+<script>
+
+    console.log("Is this working");
+    // document.getElementById('categorySelect').addEventListener('change', function() {
+    //     const select = this;
+    //     const input = document.getElementById('newCategoryInput');
+    //     input.style.display = select.value === 'addNew' ? 'block' : 'none';
+    // });
+</script>
+
+<!--<script src="" th:src="@{script.js}">  </script>-->
+
+
+
+
 </body>
+
+
+
+
+
+
 
 </html>

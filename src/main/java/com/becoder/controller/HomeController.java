@@ -34,6 +34,7 @@ public class HomeController {
 
 	@GetMapping("/register")
 	public String register() {
+
 		return "register";
 	}
 
@@ -72,6 +73,12 @@ public class HomeController {
 	@GetMapping("/editNotes")
 	public String editNotes(){
 		return "edit_notes";
+	}
+
+
+	@GetMapping("/adminHome")
+	public String adminHome(){
+		return "admin-home";
 	}
 
 

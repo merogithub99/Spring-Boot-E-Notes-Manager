@@ -3,6 +3,7 @@ package com.becoder.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @Entity
 public class Notes {
@@ -14,6 +15,17 @@ public class Notes {
     private String category;
 
     private String description;
+
+    @Lob
+    private byte[] file;
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
 
     private LocalDate date;
     @ManyToOne
@@ -65,5 +77,19 @@ public class Notes {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Notes{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", file=" + Arrays.toString(file) +
+                ", date=" + date +
+                ", user=" + user +
+                '}';
     }
 }

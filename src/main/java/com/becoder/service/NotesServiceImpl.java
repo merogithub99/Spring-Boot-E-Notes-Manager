@@ -30,7 +30,6 @@ public class NotesServiceImpl implements NotesService{
     public List<Notes> getNotesByUser(User user) {
 
         return notesRepository.findByUser(user);
-
     }
 
     @Override
@@ -42,6 +41,14 @@ public class NotesServiceImpl implements NotesService{
     public List<String> getAllCategories() {
         return notesRepository.findAllCategories();
     }
+
+    @Override
+    public List<Notes> searchNotes(String query, User user) {
+        // Call the custom repository method to search notes by title or description containing the query string
+        List<Notes> searchResults = notesRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndUser(query, query, user);
+        return searchResults;
+    }
+
 
 
     @Override
@@ -59,3 +66,5 @@ public class NotesServiceImpl implements NotesService{
        return false;
     }
 }
+
+

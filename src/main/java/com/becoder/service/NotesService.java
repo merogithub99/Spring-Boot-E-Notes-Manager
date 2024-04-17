@@ -18,5 +18,7 @@ public interface NotesService {
     List<Notes> getNotesByCategoryAndUser(String category, User user);
 
     List<String> getAllCategories();
+
+    List<Notes> searchNotes(String query, User user);
 }
 

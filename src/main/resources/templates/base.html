@@ -13,11 +13,16 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
           integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>-->
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/"><i class="fa-solid fa-book"></i>
+        <a class="navbar-brand" href="/"><i class="fa-solid fa-clipboard"></i>
             Enotes</a>
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -34,8 +39,10 @@
                 <th:block th:if="${user!=NULL}">
                     <li class="nav-item"><a class="nav-link" href="/user/addNotes"><i
                             class="fa-solid fa-plus"></i> Add </a></li>
-                    <li class="nav-item"><a class="nav-link" href="/user/viewNotes"><i
-                            class="fa-solid fa-list"></i> View All Notes </a></li>
+
+
+
+                    <li class="nav-item"><a class="nav-link" href="/user/viewNotes"><i class="fa-solid fa-eye"></i> View All Notes </a></li>
 
 
                     <!--edited just -->
@@ -81,18 +88,23 @@
                     <li class="nav-item"><a href="signin"
                                             class="btn btn-sm btn-primary ms-2"><i
                             class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+
+                    <li class="nav-item"><a href="adminLogin"
+                                            class="btn btn-sm btn-primary ms-2"><i class="fa-solid fa-lock"></i>
+                        Admin</a></li>
+
                 </th:block>
 
 
                 <th:block th:if="${user!=NULL}">
 
                     <!-- Search bar for logged in user -->
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search note here"
-                               aria-label="Search">
+                    <form class="d-flex" th:action="@{/user/search}" method="GET"> <!-- Change action to your backend endpoint -->
+                        <input class="form-control me-2" type="search" name="query" placeholder="Search note here" aria-label="Search">
                         <button class="btn btn-outline-light btn-sm me-4" type="submit">Search</button>
                         <!-- Added me-2 class for margin -->
                     </form>
+
 
                     <li class="nav-item"><a href="#"
                                             class="btn btn-sm btn-primary"><i
@@ -114,6 +126,10 @@
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+
+    console.log("Hello");
+
+</script>
 </body>
 </html>

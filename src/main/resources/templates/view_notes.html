@@ -8,13 +8,16 @@
 <body>
 <section>
     <div class="container-fluid p-2">
-        <h4 class="text-center">View All Notes</h4>
+        <h4 class="text-center" th:if="${searchResults}">Search Results</h4>
+        <h4 class="text-center" th:unless="${searchResults}">All Notes</h4>
+
         <th:block th:if="${session.msg}">
             <p class="fs-5 text-center text-success">[[${session.msg}]]</p>
             <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
         </th:block>
+
         <div class="row">
-            <div th:each="n:${notesList}" class="col-md-10 offset-md-1 mt-2">
+            <div th:if="${searchResults}" th:each="n: ${searchResults}" class="col-md-10 offset-md-1 mt-2">
                 <div class="card shadow p-1 mb-1 bg-body rounded">
                     <div class="card-body">
                         <div class="text-center">
@@ -31,17 +34,46 @@
                             <a th:href="@{'deleteNotes/'+${n.id}}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
+            <div th:unless="${searchResults}" th:each="n: ${notesList}" class="col-md-10 offset-md-1 mt-2">
+                <div class="card shadow p-1 mb-1 bg-body rounded">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <i class="fa-solid fa-book fa-2x"></i>
+                        </div>
+
+                        <p class="fw-bold">[[${n.title}]]</p>
+                        <p>[[${n.description}]]</p>
+                        <p>Publish Date : <span class="fw-bold text-primary">[[${n.date}]]</span></p>
+                        <p>Category: [[${n.category}]]</p>
+
+                        <!-- Check if a file is present for the note -->
+                        <div th:if="${n.file ne null}">
+                            <p>
+                                <a th:href="@{/user/downloadFile/{noteId}(noteId=${n.id})}" class="btn btn-primary btn-sm">Download File</a>
+                                <!-- Add a new button/link to open the file in the browser -->
+                                <a th:href="@{/user/openFile/{noteId}(noteId=${n.id})}" class="btn btn-success btn-sm">Open in Browser</a>
+                            </p>
+                        </div>
+
+                        <div class="text-center">
+                            <a th:href="@{'editNotes/'+${n.id}}" class="btn btn-primary btn-sm">Edit</a>
+                            <a th:href="@{'deleteNotes/'+${n.id}}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:unless="${searchResults}" class="col-md-10 offset-md-1 mt-2">
+                <div class="alert alert-info text-center" role="alert" th:if="${#lists.isEmpty(notesList)}">
+                    No notes found.
+                </div>
+            </div>
         </div>
     </div>
-
 </section>
+
 </body>
 </html>
-
-
-

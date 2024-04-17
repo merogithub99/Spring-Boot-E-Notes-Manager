@@ -41,7 +41,7 @@ public class SecurityConfig {
 					.requestMatchers("/**").permitAll().and()
 					.formLogin().loginPage("/signin")
 					.loginProcessingUrl("/userLogin")
-					.defaultSuccessUrl("/user/addNotes").permitAll();
+					.defaultSuccessUrl("/user/viewNotes").permitAll();
 	return	http.build();
 
 	}

@@ -1,9 +1,8 @@
 package com.becoder.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class User {
@@ -12,7 +11,16 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	private List<Notes> notes;
+
+
+
 	private String name;
+
+	private String userType;
+
+
 
 	private String qualification;
 
@@ -25,6 +33,16 @@ public class User {
 	private String password;
 
 	private String role;
+
+
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
 
 	public int getId() {
 		return id;
@@ -90,10 +108,27 @@ public class User {
 		this.role = role;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", qualification=" + qualification + ", email=" + email
-				+ ", address=" + address + ", gender=" + gender + ", password=" + password + ", role=" + role + "]";
+
+	public List<Notes> getNotes() {
+		return notes;
 	}
 
+	public void setNotes(List<Notes> notes) {
+		this.notes = notes;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", userType='" + userType + '\'' +
+				", qualification='" + qualification + '\'' +
+				", email='" + email + '\'' +
+				", address='" + address + '\'' +
+				", gender='" + gender + '\'' +
+				", password='" + password + '\'' +
+				", role='" + role + '\'' +
+				'}';
+	}
 }
