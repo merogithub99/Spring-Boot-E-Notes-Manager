@@ -49,6 +49,11 @@ public class NotesServiceImpl implements NotesService{
         return searchResults;
     }
 
+    @Override
+    public int getTotalNotesCount() {
+        // Use the count() method provided by Spring Data JPA repository
+        return (int) notesRepository.count();
+    }
 
 
     @Override

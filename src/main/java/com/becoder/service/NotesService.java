@@ -20,5 +20,7 @@ public interface NotesService {
     List<String> getAllCategories();
 
     List<Notes> searchNotes(String query, User user);
+
+    int getTotalNotesCount();
 }
 

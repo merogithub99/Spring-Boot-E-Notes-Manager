@@ -25,7 +25,7 @@
                         </th:block>
                     </div>
                     <div class="card-body">
-                        <form action="/user/saveNotes" th:action="@{/user/saveNotes}" method="post">
+                        <form action="/user/saveNotes" th:action="@{/user/saveNotes}" method="post" enctype="multipart/form-data" >
                             <div class="mb-3">
                                 <label>Enter Title</label>
                                 <input type="text" name="title" class="form-control" required>
@@ -51,8 +51,8 @@
                             </div>
 
                             <div class="mb-5">
-                                <label>Upload PDF File</label>
-                                <input type="file" name="file" class="form-control-file">
+                                <label>Upload photo</label>
+                                <input type="file" name="img" class="form-control">
                             </div>
 
                             <button class="btn btn-primary mt-4">Save</button>

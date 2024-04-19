@@ -6,62 +6,62 @@
 <title>Edit Notes</title>
 </head>
 <body>
-	<section>
-		<div class="container mt-2">
-			<div class="row">
-				<div class="col-md-10 offset-md-1">
-					<div class="card">
-						<div class="card-header text-center">
-							<h3>Edit your Notes</h3>
-
-						</div>
-						<div class="card-body">
-							<form action="/user/updateNotes" method="post">
-
-								<div class="mb-3">
-									<label>Enter Title</label>
-									<input type="text" name="title" th:value="${n.title}"
-										class="form-control">
+<section>
+	<div class="container mt-2">
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<div class="card">
+					<div class="card-header text-center">
+						<h3>Edit your Notes</h3>
+					</div>
+					<div class="card-body">
+						<form action="/user/updateNotes" method="post" enctype="multipart/form-data">
+							<div class="mb-3">
+								<label>Enter Title</label>
+								<input type="text" name="title" th:value="${n.title}" class="form-control">
+							</div>
+							<div class="mb-3">
+								<label>Select Category</label>
+								<select name="category" class="form-control" id="categorySelect">
+									<option value="">Select note category</option>
+									<option th:selected="${n.category == 'personal_expenses'}" value="personal_expenses">Personal Expenses</option>
+									<option th:selected="${n.category == 'birthdates'}" value="birthdates">Birthdates</option>
+									<option th:selected="${n.category == 'sharemarket_info'}" value="sharemarket_info">Sharemarket Info</option>
+									<option th:selected="${n.category == 'schedules'}" value="schedules">Schedules</option>
+									<option value="addNew">
+										<i class="fas fa-plus"></i>
+										Add New Category
+									</option>
+								</select>
+								<input type="text" id="newCategoryInput" class="form-control mt-2" placeholder="Enter New Category" style="display: none;">
+							</div>
+							<div class="mb-3">
+								<label>Enter Description</label>
+								<textarea rows="6" cols="" class="form-control" name="description" th:text="${n.description}"></textarea>
+							</div>
+							<div class="mb-5">
+								<label>Current Photo</label>
+								<img th:src="@{/img/{imagePath}(imagePath=${n.image})}" class="img-fluid" alt="Current Image" style="max-height: 200px;">
+								<div class="form-check mt-2">
+									<input class="form-check-input" type="checkbox" name="removeImage" id="removeImage">
+									<label class="form-check-label" for="removeImage">
+										Remove Current Photo
+									</label>
 								</div>
-
-
-
-
-								<div class="mb-3">
-									<label>Select Category</label>
-									<select name="category" class="form-control" id="categorySelect">
-										<option value="">select note category</option>
-										<option th:selected="${n.category == 'personal_expenses'}" value="personal_expenses">Personal Expenses</option>
-										<option th:selected="${n.category == 'birthdates'}" value="birthdates">Birthdates</option>
-										<option th:selected="${n.category == 'sharemarket_info'}" value="sharemarket_info">Sharemarket Info</option>
-										<option th:selected="${n.category == 'schedules'}" value="schedules">Schedules</option>
-										<option value="addNew">
-											<i class="fas fa-plus"></i>
-											Add New Category
-										</option>
-									</select>
-									<input type="text" id="newCategoryInput" class="form-control mt-2" placeholder="Enter New Category" style="display: none;">
-								</div>
-
-
-								<div class="mb-3">
-									<label>Enter Description</label>
-									<textarea rows="6" cols="" class="form-control"
-										name="description">[[${n.description}]]</textarea>
-								</div>
-								<input type="hidden" name="id" th:value="${n.id}">
-
-								<button class="btn btn-primary mt-4">Update</button>
-
-
-
-							</form>
-						</div>
+							</div>
+							<div class="mb-5">
+								<label>Upload New Photo</label>
+								<input type="file" name="img" class="form-control">
+							</div>
+							<input type="hidden" name="id" th:value="${n.id}">
+							<button class="btn btn-primary mt-4">Update</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
 </body>
 </html>

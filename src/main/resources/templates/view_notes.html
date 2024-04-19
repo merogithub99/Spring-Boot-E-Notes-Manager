@@ -5,75 +5,58 @@
     <meta charset="ISO-8859-1">
     <title>View Notes</title>
 </head>
-<body>
+<body class="bg-dark">
 <section>
-    <div class="container-fluid p-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-4">
+                <h4 class="text-center">Total Notes: <span th:text="${totalNotesCount}"></span></h4>
+            </div>
+        </div>
+
         <h4 class="text-center" th:if="${searchResults}">Search Results</h4>
         <h4 class="text-center" th:unless="${searchResults}">All Notes</h4>
 
-        <th:block th:if="${session.msg}">
-            <p class="fs-5 text-center text-success">[[${session.msg}]]</p>
-            <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
-        </th:block>
-
         <div class="row">
-            <div th:if="${searchResults}" th:each="n: ${searchResults}" class="col-md-10 offset-md-1 mt-2">
-                <div class="card shadow p-1 mb-1 bg-body rounded">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <i class="fa-solid fa-book fa-2x"></i>
-                        </div>
-
-                        <p class="fw-bold">[[${n.title}]]</p>
-                        <p>[[${n.description}]]</p>
-                        <p>Publish Date : <span class="fw-bold text-primary">[[${n.date}]]</span></p>
-                        <p>Category: [[${n.category}]]</p>
-
-                        <div class="text-center">
-                            <a th:href="@{'editNotes/'+${n.id}}" class="btn btn-primary btn-sm">Edit</a>
+            <div th:if="${searchResults}" th:each="n: ${searchResults}" class="col-md-4 mt-2">
+                <div class="card h-100 shadow p-3 mb-5 bg-info rounded">
+                    <div class="card-body mb-3">
+                        <h5 class="card-title fw-bold">[[${n.title}]]</h5>
+                        <p class="card-text">[[${n.description}]]</p>
+                        <p class="card-text"><small class="text-muted">Publish Date: <span class="fw-bold">[[${n.date}]]</span></small></p>
+                        <p class="card-text"><small class="text-muted">Category: [[${n.category}]]</small></p>
+                    </div>
+                    <img th:src="@{/img/{imagePath}(imagePath=${n.image})}" class="card-img-bottom img-fluid" alt="Note Image" style="height: 200px; width: auto;">
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-end">
+                            <a th:href="@{'editNotes/'+${n.id}}" class="btn btn-primary btn-sm me-2">Edit</a>
                             <a th:href="@{'deleteNotes/'+${n.id}}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div th:unless="${searchResults}" th:each="n: ${notesList}" class="col-md-10 offset-md-1 mt-2">
-                <div class="card shadow p-1 mb-1 bg-body rounded">
+            <div th:unless="${searchResults}" th:each="n: ${notesList}" class="col-md-4 mt-2 mb-3">
+                <div class="card h-100 shadow p-3 mb-5 bg-info rounded">
                     <div class="card-body">
-                        <div class="text-center">
-                            <i class="fa-solid fa-book fa-2x"></i>
-                        </div>
-
-                        <p class="fw-bold">[[${n.title}]]</p>
-                        <p>[[${n.description}]]</p>
-                        <p>Publish Date : <span class="fw-bold text-primary">[[${n.date}]]</span></p>
-                        <p>Category: [[${n.category}]]</p>
-
-                        <!-- Check if a file is present for the note -->
-                        <div th:if="${n.file ne null}">
-                            <p>
-                                <a th:href="@{/user/downloadFile/{noteId}(noteId=${n.id})}" class="btn btn-primary btn-sm">Download File</a>
-                                <!-- Add a new button/link to open the file in the browser -->
-                                <a th:href="@{/user/openFile/{noteId}(noteId=${n.id})}" class="btn btn-success btn-sm">Open in Browser</a>
-                            </p>
-                        </div>
-
-                        <div class="text-center">
-                            <a th:href="@{'editNotes/'+${n.id}}" class="btn btn-primary btn-sm">Edit</a>
+                        <h5 class="card-title fw-bold">[[${n.title}]]</h5>
+                        <p class="card-text">[[${n.description}]]</p>
+                        <p class="card-text"><small class="text-muted">Publish Date: <span class="fw-bold">[[${n.date}]]</span></small></p>
+                        <p class="card-text"><small class="text-muted">Category: [[${n.category}]]</small></p>
+                    </div>
+                    <img th:src="@{/img/{imagePath}(imagePath=${n.image})}" class="card-img-bottom img-fluid" alt="Note Image" style="height: 200px; width: auto;">
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-end">
+                            <a th:href="@{'editNotes/'+${n.id}}" class="btn btn-primary btn-sm me-2">Edit</a>
                             <a th:href="@{'deleteNotes/'+${n.id}}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div th:unless="${searchResults}" class="col-md-10 offset-md-1 mt-2">
-                <div class="alert alert-info text-center" role="alert" th:if="${#lists.isEmpty(notesList)}">
-                    No notes found.
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 </body>
 </html>

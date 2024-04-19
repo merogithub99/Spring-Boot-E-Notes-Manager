@@ -25,6 +25,9 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private NotesService notesService;
+
 	@GetMapping("/")
 	public String index() {
 
@@ -66,8 +69,18 @@ public class HomeController {
 	}
 
 	@GetMapping("/viewNotes")
-	public String viewNotes(){
-		return "view_notes";
+	public String viewNotes(Model model){
+/*
+		// Retrieve the total notes count
+		int totalNotesCount = notesService.getTotalNotesCount(); // Update this method based on your service implementation
+
+		System.out.println(totalNotesCount);
+		// Add the totalNotesCount to the model
+		model.addAttribute("totalNotesCount", totalNotesCount);
+ Return the view name
+*/
+
+        return "view_notes";
 	}
 
 	@GetMapping("/editNotes")

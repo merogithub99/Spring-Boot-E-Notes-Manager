@@ -19,8 +19,5 @@ public interface NotesRepository extends JpaRepository<Notes,Integer> {
 
     Optional<Notes> findById(int id);
 
-
-
-
     List<Notes> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndUser(String query, String query1, User user);
 }

@@ -14,8 +14,6 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Notes> notes;
 
-
-
 	private String name;
 
 	private String userType;
